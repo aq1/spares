@@ -1,6 +1,5 @@
 from django.shortcuts import render_to_response, redirect
 from django.core.urlresolvers import reverse
-from django.forms.models import model_to_dict
 
 from spares_info import models
 
@@ -23,15 +22,18 @@ def contacts(request):
 def shops(request, pk=None):
 
     if not pk:
-        return render_to_response('spares_info/shops.html')
+        template = 'spares_info/shops.html'
+        context = {'shops': models.Shop.get_all_shops()}
     else:
         try:
-            shop = models.Shop.objects.get(pk=pk)
+            shop = models.Shop.get_basic_info(pk=pk)
         except models.Shop.DoesNotExist:
             return redirect(reverse('shops'))
 
-        context = {'shop': model_to_dict(shop)}
-        return render_to_response('spares_info/shop.html', context)
+        context = {'shop': shop}
+        template = 'spares_info/shop.html'
+
+    return render_to_response(template, context)
 
 
 def catalog(request):

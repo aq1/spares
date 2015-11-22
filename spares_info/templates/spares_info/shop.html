@@ -1,0 +1,36 @@
+{% extends 'spares_info/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Каталог{% endblock %}
+
+{% block menu %}
+	<a href="{% url 'info' %}" class="list-group-item">Информация</a>
+	<a href="{% url 'contacts' %}" class="list-group-item">Контакты</a>
+	<a href="{% url 'shops' %}" class="list-group-item active">Магазины</a>
+	<a href="{% url 'catalog' %}" class="list-group-item">Каталог</a>
+{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-5"><img src="{{ shop.photo }}"></div>
+		<div class="col-md-5">
+			<table class="table table-hover">
+				<tr>
+					<td>Адрес</td>
+					<td>{{ shop.address }}</td>
+				</tr>
+				<tr>
+					<td>Телефон</td>
+					<td>+7-555-55-55</td>						
+				</tr>
+				<tr>
+					<td>Режим работы</td>
+					<td>8:00-20:00</td>
+				</tr>
+			</table>
+			<div>
+				<img src="{{ shop.map }}" alt="Карта">
+			</div>
+		</div>
+	</div>
+{% endblock %}
