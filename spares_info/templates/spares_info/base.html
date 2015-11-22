@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Магазин запчастей{% endblock %}</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'index' %}">
+                        <img alt="Лого">
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="list-group">
+                    {% block menu %}
+                    	<a href="{% url 'info' %}" class="list-group-item">Информация</a>
+                    	<a href="{% url 'contacts' %}" class="list-group-item">Контакты</a>
+                    	<a href="{% url 'shops' %}" class="list-group-item">Магазины</a>
+                    	<a href="{% url 'catalog' %}" class="list-group-item">Каталог</a>
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% block body %}
+                hello
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+<link rel="stylesheet" href="/static/lib/bootstrap-3.3.5/css/bootstrap.min.css"> {% block custom_css %} {% endblock %}
+
+</html>

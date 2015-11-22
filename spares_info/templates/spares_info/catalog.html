@@ -1,0 +1,14 @@
+{% extends 'spares_info/base.html' %}
+
+{% block title %}Каталог{% endblock %}
+
+{% block menu %}
+	<a href="{% url 'info' %}" class="list-group-item">Информация</a>
+	<a href="{% url 'contacts' %}" class="list-group-item">Контакты</a>
+	<a href="{% url 'shops' %}" class="list-group-item">Магазины</a>
+	<a href="{% url 'catalog' %}" class="list-group-item active">Каталог</a>
+{% endblock %}
+
+{% block body %}
+	<h2>Каталог</h2>
+{% endblock %}
