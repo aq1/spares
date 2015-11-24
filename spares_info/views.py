@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, redirect
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
+from django.db import IntegrityError
 
 from spares_info import models
 
@@ -20,9 +21,18 @@ def contacts(request):
     return render_to_response('spares_info/contacts.html')
 
 
-def catalog(request):
+def catalog(request, pk=None):
 
-    return render_to_response('spares_info/catalog.html')
+    catalog = models.Category.objects.all().order_by('name')
+
+    if pk:
+        items = models.Product.objects.filter(category_id=pk)
+    else:
+        items = None
+
+    return render_to_response('spares_info/catalog.html', {'catalog': catalog,
+                                                           'selected': pk,
+                                                           'items': items})
 
 
 def shops(request, pk=None):
@@ -48,17 +58,17 @@ def n(f):
     import re
     import time
 
+
+
     j = 0
     r = re.compile('\d')
-    ff = csv.reader(f.read().decode('cp1251'))
-    for i, row in enumerate(ff):
-        print(row)
-        try:
-            row[2]
-        except IndexError:
-            continue
+    # f = f.read().decode('cp1251')
+    for i, row in enumerate(f.readlines()):
+        row = row.decode('cp1251').split(',')
+        # print(row)
         if not row[2] and row[1]:
             category = row[1]
+            category_model, _ = models.Category.objects.get_or_create(name=category)
         else:
             rr = r.findall(row[2])
             price = '%s.%s' % (''.join(rr[:-2]), ''.join(rr[-2:]))
@@ -66,9 +76,16 @@ def n(f):
                 price = float(price)
             except ValueError:
                 j += 1
-                print('WOWOWOWOW', i, row)
+                print(i, category, row[1], price)
+                continue
 
-            print(i, category, row[1], price)
+            try:
+                models.Product.objects.get_or_create(category=category_model,
+                                                     name=row[1],
+                                                     price=price)
+            except IntegrityError:
+                print(i, category, row[1], price)
+
 
 # @login_reqired
 def catalog_upload(request):

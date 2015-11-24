@@ -3,12 +3,39 @@
 {% block title %}Каталог{% endblock %}
 
 {% block menu %}
-	<a href="{% url 'info' %}" class="list-group-item">Информация</a>
-	<a href="{% url 'contacts' %}" class="list-group-item">Контакты</a>
-	<a href="{% url 'shops' %}" class="list-group-item">Магазины</a>
-	<a href="{% url 'catalog' %}" class="list-group-item active">Каталог</a>
+    <div class="col-md-2">
+        <div class="list-group">
+            <a href="{% url 'info' %}" class="list-group-item">Информация</a>
+            <a href="{% url 'contacts' %}" class="list-group-item">Контакты</a>
+            <a href="{% url 'shops' %}" class="list-group-item">Магазины</a>
+            <a href="{% url 'catalog' %}" class="list-group-item active">Каталог</a>
+        </div>
+        <div class="list-group">
+            {% for item in catalog %}
+                {% if item.id == selected %}
+                    <a href="{% url 'catalog' item.id %}" class="list-group-item active">
+                        {{ item.name }}
+                    </a>
+                {% else %}
+                    <a href="{% url 'catalog' item.id %}" class="list-group-item">
+                    {{ item.name }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
-
 {% block body %}
-	<h2>Каталог</h2>
+    <table class="table table-condensed table-hover">
+        {% for item in items %}
+            <tr>
+                <td>
+                    {{ item.name }}
+                </td>
+                <td>
+                    {{ item.price }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

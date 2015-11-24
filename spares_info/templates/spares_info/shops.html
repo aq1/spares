@@ -4,11 +4,16 @@
 {% block title %}Адреса магазинов{% endblock %}
 
 {% block menu %}
-    <a href="{% url 'info' %}" class="list-group-item">Информация</a>
-    <a href="{% url 'contacts' %}" class="list-group-item">Контакты</a>
-    <a href="{% url 'shops' %}" class="list-group-item active">Магазины</a>
-    <a href="{% url 'catalog' %}" class="list-group-item">Каталог</a>
+    <div class="col-md-2">
+        <div class="list-group">
+            <a href="{% url 'info' %}" class="list-group-item">Информация</a>
+            <a href="{% url 'contacts' %}" class="list-group-item">Контакты</a>
+            <a href="{% url 'shops' %}" class="list-group-item active">Магазины</a>
+            <a href="{% url 'catalog' %}" class="list-group-item">Каталог</a>
+        </div>
+    </div>
 {% endblock %}
+
 
 {% block body %}
     <div class="row">

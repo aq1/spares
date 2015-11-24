@@ -19,16 +19,16 @@
             </div>
         </nav>
         <div class="row">
-            <div class="col-md-2">
-                <div class="list-group">
-                    {% block menu %}
-                    	<a href="{% url 'info' %}" class="list-group-item">Информация</a>
-                    	<a href="{% url 'contacts' %}" class="list-group-item">Контакты</a>
-                    	<a href="{% url 'shops' %}" class="list-group-item">Магазины</a>
-                    	<a href="{% url 'catalog' %}" class="list-group-item">Каталог</a>
-                    {% endblock %}
+            {% block menu %}
+                <div class="col-md-2">
+                    <div class="list-group">
+                        <a href="{% url 'info' %}" class="list-group-item">Информация</a>
+                        <a href="{% url 'contacts' %}" class="list-group-item">Контакты</a>
+                        <a href="{% url 'shops' %}" class="list-group-item">Магазины</a>
+                        <a href="{% url 'catalog' %}" class="list-group-item">Каталог</a>
+                    </div>
                 </div>
-            </div>
+            {% endblock %}
             <div class="col-md-10">
                 {% block body %}
                     hello

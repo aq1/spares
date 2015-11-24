@@ -9,11 +9,14 @@ class Category(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True,
                             related_name='children', db_index=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
 
     category = models.ForeignKey(Category)
-    name = models.CharField(max_length=1023, unique=True)
+    name = models.CharField(max_length=2047)
     quantity = models.PositiveIntegerField(blank=True, default=0)
     price = models.FloatField(blank=True, default=0)
 
