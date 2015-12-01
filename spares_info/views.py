@@ -1,24 +1,23 @@
+# -*- coding: UTF-8 -*-
+
+from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.core.urlresolvers import reverse
-from django.template import RequestContext
+from django.template import RequestContext, TemplateDoesNotExist
 from django.db import IntegrityError
 
 from spares_info import models
 
 
-def index(request):
+def page(request, page_name=None):
 
-    return render_to_response('spares_info/index.html')
+    if not page_name:
+        page_name = 'index'
 
-
-def info(request):
-
-    return render_to_response('spares_info/info.html')
-
-
-def contacts(request):
-
-    return render_to_response('spares_info/contacts.html')
+    try:
+        return render_to_response('spares_info/%s.html' % page_name)
+    except TemplateDoesNotExist:
+        return HttpResponse('Not found', status=400)
 
 
 def catalog(request, pk=None):
@@ -31,7 +30,7 @@ def catalog(request, pk=None):
         items = None
 
     return render_to_response('spares_info/catalog.html', {'catalog': catalog,
-                                                           'selected': pk,
+                                                           'selected': int(pk),
                                                            'items': items})
 
 

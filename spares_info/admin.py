@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
 

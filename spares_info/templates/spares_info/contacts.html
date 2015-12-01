@@ -3,10 +3,10 @@
 {% block menu %}
     <div class="col-md-2">
         <div class="list-group">
-            <a href="{% url 'info' %}" class="list-group-item">Информация</a>
-            <a href="{% url 'contacts' %}" class="list-group-item active">Контакты</a>
-            <a href="{% url 'shops' %}" class="list-group-item">Магазины</a>
-            <a href="{% url 'catalog' %}" class="list-group-item">Каталог</a>
+            <a href="{% url 'page' 'info' %}" class="list-group-item">Информация</a>
+            <a href="{% url 'page' 'contacts' %}" class="list-group-item active">Контакты</a>
+            <a href="{% url 'page' 'shops' %}" class="list-group-item">Магазины</a>
+            <a href="{% url 'page' 'catalog' %}" class="list-group-item">Каталог</a>
         </div>
     </div>
 {% endblock %}
